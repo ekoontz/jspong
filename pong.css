@@ -1,0 +1,54 @@
+div {
+      border:2px solid darkgrey;
+      color: black;
+      padding:1em;
+      margin-bottom:1em;
+}
+
+div.playfield {
+      margin:0em;
+      padding:1em;
+      height:300px;
+      float:right;
+      width:600px;
+}
+
+div.controls {
+      float:left;
+      margin-top:1em;
+      padding-top:1em;
+      padding-bottom:1em;
+      padding-left:1em;
+      white-space:normal;
+}
+
+div.paddle {
+      position:relative;
+      border:3px solid green;
+      padding:1em;
+      width:1%;
+      height:25%;
+      background: #c9e310;
+      color:white;
+}
+
+#paddleleft {
+      left:0%;
+      top:10%;
+}
+
+#paddleright {
+      left:90%;
+      top:20%;
+}
+
+#ball {
+      float:left;
+      width:2em;
+      left:50%;
+      position:relative;
+      background:blue;
+}
+
+
+
