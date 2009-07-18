@@ -12,29 +12,32 @@
     <div class="controls">Welcome to javascript pong!
       <div>options:
         <div>New Game</div>
-	<div>bar</div>
         <div id="show_x">(start)</div>
         <div id="show_y">(start)</div>
       </div>
     </div>
 
-    <div class="playfield">
-
-      <div class="paddle" id="paddleleft" onclick="alert('got here');">
-	x
+    <div id="arena">
+      <div class="paddle_area" id="left_paddle_area">
+	<div class="paddle" id="paddleleft" onclick="alert('got here');">
+	  p1
+	</div>
       </div>
-
-      <div id="ball">kick me</div>
-
-
-      <div class="paddle" id="paddleright">
-         y
-      </div>
-
       
-
+      <div id="playfield">
+	<div id="ball1" class="ball">
+	</div>
+	
+	<div id="ball2" class="ball">
+	</div>
+      </div>
+      
+      <div class="paddle_area" id="right_paddle_area">
+	<div class="paddle" id="paddleright" onclick="alert('got here');">
+	  p2
+	</div>
+      </div>
     </div>
-
 
 
   </body>

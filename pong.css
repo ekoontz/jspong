@@ -1,16 +1,49 @@
-div {
+div.controls {
+    float:left;
+}
+
+div.controls div {
       border:2px solid darkgrey;
       color: black;
       padding:1em;
       margin-bottom:1em;
 }
 
-div.playfield {
-      margin:0em;
-      padding:1em;
-      height:300px;
-      float:right;
-      width:600px;
+#arena {
+    padding:0;
+    margin:10%;
+    float:left;
+    width:400px;
+    position:relative;
+    background:lightgreen;
+    height:400px;
+    border:1px solid black;
+}
+
+div.paddle_area {
+    padding:0;
+    margin:0;
+    position:absolute;
+    width:50px;
+    height:100%;
+    background:lightblue;
+}
+
+#left_paddle_area {
+    left:0%;
+}
+
+#right_paddle_area {
+    left:350px;
+}
+
+#playfield {
+    margin-left:50px;
+    margin-right:50px;
+    width:400px;
+    float:left;
+    position:relative;
+    height:100%;
 }
 
 div.controls {
@@ -23,32 +56,41 @@ div.controls {
 }
 
 div.paddle {
-      position:relative;
-      border:3px solid green;
-      padding:1em;
-      width:1%;
-      height:25%;
-      background: #c9e310;
-      color:white;
+    padding:0;
+    float:left;
+    margin:0;
+    position:relative;
+    border:3px solid green;
+    width:45px;
+    height:25%;
+    background: #c9e310;
+    color:white;
 }
 
 #paddleleft {
-      left:0%;
-      top:10%;
+    left:0;
+    top:10%;
 }
 
 #paddleright {
-      left:90%;
-      top:20%;
+    top:50%;
 }
 
-#ball {
-      float:left;
-      width:2em;
-      left:50%;
-      position:relative;
-      background:blue;
+.ball {
+    padding:0;
+    margin:0;
+    float:left;
+    width:10px;
+    height:10px;
+    position:absolute;
+    border:1px solid black;
 }
 
+#ball1 {
+    background: red;
+}
 
+#ball2 {
+    background: blue;
+}
 
