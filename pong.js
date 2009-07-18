@@ -37,9 +37,6 @@ function move_ball(ball_id,increment_x,increment_y) {
     x = x + increment_x;
     y = y + increment_y;
  
-/*    document.getElementById("show_x").innerHTML = increment_x;
-    document.getElementById("show_y").innerHTML = increment_y;*/
-
     document.getElementById(ball_id).style.left = x+"px";
     document.getElementById(ball_id).style.top = y+"px";
 

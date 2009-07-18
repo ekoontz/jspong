@@ -1,8 +1,10 @@
 div.controls {
+    border:2px solid darkgrey;
     float:left;
 }
 
 div.controls div {
+    margin:10%;
       border:2px solid darkgrey;
       color: black;
       padding:1em;
