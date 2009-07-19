@@ -1,5 +1,17 @@
-
 function setup() {
+
+    document.getElementById("paddleleft").onmousedown =
+	function() { grab_paddle(this);}
+    
+    document.getElementById("paddleright").onmousedown =
+	function() { grab_paddle(this);}
+
+    document.getElementById("paddleleft").onmouseup =
+	function() { drop_paddle(this);}
+    
+    document.getElementById("paddleright").onmouseup =
+	function() { drop_paddle(this);}
+
     document.getElementById("ball1").style.left = "100px";
     document.getElementById("ball1").style.top  = "200px";
 
@@ -18,6 +30,29 @@ function setup() {
     setTimeout("move_ball('ball2',"+increment_x_2+","+increment_y_2+")", 10);
 
 }
+
+var clicked_obj = null;
+
+function grab_paddle(obj) {
+    obj.style.background = "#ce9";
+    clicked_obj = obj;
+    document.onmousemove = move_paddle;
+}
+
+function move_paddle(e) {
+    var scale = 1;
+    var offset = -200;
+    document.getElementById("mousey").innerHTML 
+	=  ((e.pageY / scale) + offset ) + "px";
+    clicked_obj.style.top = ((e.pageY / scale) + offset) + "px";
+}
+
+function drop_paddle(obj) {
+    obj.style.background = "#c9e310";
+    clicked_obj = null;
+    document.onmousemove = null;
+}
+
 
 function move_ball(ball_id,increment_x,increment_y) {
     var x = document.getElementById(ball_id).style.left;
