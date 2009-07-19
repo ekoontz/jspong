@@ -15,10 +15,8 @@ div.controls div {
     padding:0;
     margin:10%;
     float:left;
-    width:400px;
     position:relative;
     background:lightgreen;
-    height:400px;
     border:1px solid black;
 }
 
@@ -42,7 +40,6 @@ div.paddle_area {
 #playfield {
     margin-left:50px;
     margin-right:50px;
-    width:400px;
     float:left;
     position:relative;
     height:100%;
@@ -65,7 +62,6 @@ div.paddle {
     position:relative;
     border:3px solid green;
     width:45px;
-    height:25%;
     background: #c9e310;
     color:white;
 }

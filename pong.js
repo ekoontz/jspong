@@ -1,17 +1,24 @@
+var arena_height = "400";
+var arena_width = "400";
+
 function setup() {
+
+    document.getElementById("arena").style.height = arena_height+"px";
+    document.getElementById("arena").style.width = arena_width+"px";
+    document.getElementById("playfield").style.height = arena_width+"px";
+    document.getElementById("paddleleft").style.height = "75px";
+    document.getElementById("paddleright").style.height = "75px";
 
     document.getElementById("paddleleft").onmousedown =
 	function() { grab_paddle(this);}
-    
-    document.getElementById("paddleright").onmousedown =
-	function() { grab_paddle(this);}
-
     document.getElementById("paddleleft").onmouseup =
 	function() { drop_paddle(this);}
-    
+
+/*    document.getElementById("paddleright").onmousedown =
+	function() { grab_paddle(this);}
     document.getElementById("paddleright").onmouseup =
 	function() { drop_paddle(this);}
-
+*/
     document.getElementById("ball1").style.left = "100px";
     document.getElementById("ball1").style.top  = "200px";
 
@@ -25,7 +32,6 @@ function setup() {
 
     var increment_x_2 = 1;
     var increment_y_2 = 3;
-
 
     setTimeout("move_ball('ball2',"+increment_x_2+","+increment_y_2+")", 10);
 
@@ -42,9 +48,23 @@ function grab_paddle(obj) {
 function move_paddle(e) {
     var scale = 1;
     var offset = -200;
-    document.getElementById("mousey").innerHTML 
-	=  ((e.pageY / scale) + offset ) + "px";
-    clicked_obj.style.top = ((e.pageY / scale) + offset) + "px";
+    if ((((e.pageY / scale) + offset) > 0)
+	&&
+	(((e.pageY / scale) + offset) < (arena_height - 75))) {
+	document.getElementById("mousey").innerHTML 
+	    =  ((e.pageY / scale) + offset ) + "px";
+	clicked_obj.style.top = ((e.pageY / scale) + offset) + "px";
+    }
+}
+
+function move_computer_paddle() {
+    var y = document.getElementById("ball1").style.top;
+    y = new Number(y.replace(/px/gi, ""));
+   
+    if (((y - 38) > 0) && ((y) < (arena_height - 50))) {
+	document.getElementById("paddleright").style.top = 
+	    (y - 38) + "px";
+    }
 }
 
 function drop_paddle(obj) {
@@ -74,6 +94,8 @@ function move_ball(ball_id,increment_x,increment_y) {
  
     document.getElementById(ball_id).style.left = x+"px";
     document.getElementById(ball_id).style.top = y+"px";
+
+    move_computer_paddle();
 
     setTimeout("move_ball('"+ball_id+"',"+increment_x+","+increment_y+")", 10);
 
