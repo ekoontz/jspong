@@ -1,24 +1,21 @@
 var arena_height = "400";
 var arena_width = "400";
 
+var paddle_height = "75";
+
 function setup() {
 
     document.getElementById("arena").style.height = arena_height+"px";
     document.getElementById("arena").style.width = arena_width+"px";
     document.getElementById("playfield").style.height = arena_width+"px";
-    document.getElementById("paddleleft").style.height = "75px";
-    document.getElementById("paddleright").style.height = "75px";
+    document.getElementById("paddleleft").style.height = paddle_height+"px";
+    document.getElementById("paddleright").style.height = paddle_height+"px";
 
     document.getElementById("paddleleft").onmousedown =
 	function() { grab_paddle(this);}
     document.getElementById("paddleleft").onmouseup =
 	function() { drop_paddle(this);}
 
-/*    document.getElementById("paddleright").onmousedown =
-	function() { grab_paddle(this);}
-    document.getElementById("paddleright").onmouseup =
-	function() { drop_paddle(this);}
-*/
     document.getElementById("ball1").style.left = "100px";
     document.getElementById("ball1").style.top  = "200px";
 
@@ -58,10 +55,10 @@ function move_paddle(e) {
 }
 
 function move_computer_paddle() {
-    var y = document.getElementById("ball1").style.top;
+    var y = document.getElementById("ball2").style.top;
     y = new Number(y.replace(/px/gi, ""));
    
-    if (((y - 38) > 0) && ((y) < (arena_height - 50))) {
+    if (((y - 38) > 0) && ((y) < (arena_height - 45))) {
 	document.getElementById("paddleright").style.top = 
 	    (y - 38) + "px";
     }
