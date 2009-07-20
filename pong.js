@@ -48,13 +48,11 @@ function move_paddle(e) {
     if ((((e.pageY / scale) + offset) > 0)
 	&&
 	(((e.pageY / scale) + offset) < (arena_height - 75))) {
-	document.getElementById("mousey").innerHTML 
-	    =  ((e.pageY / scale) + offset ) + "px";
 	clicked_obj.style.top = ((e.pageY / scale) + offset) + "px";
     }
 }
 
-function move_computer_paddle() {
+function move_player2_paddle() {
     var y = document.getElementById("ball2").style.top;
     y = new Number(y.replace(/px/gi, ""));
    
@@ -75,13 +73,61 @@ function move_ball(ball_id,increment_x,increment_y) {
     var x = document.getElementById(ball_id).style.left;
     var y = document.getElementById(ball_id).style.top;
 
+    var state = "normal";
+
     x = new Number(x.replace(/px/gi, ""));
     y = new Number(y.replace(/px/gi, ""));
  
-    if ((x > 290) || (x < 0)) {
+    if (x > 290) {
 	increment_x = increment_x * -1;
+
+	var right_paddle_y = document.getElementById("paddleright").style.top;
+	
+	right_paddle_y = new Number(right_paddle_y.replace(/px/gi, ""));
+	
+	if ((y < right_paddle_y)
+	    ||
+	    (y > (right_paddle_y + paddle_height))) {
+	    var score = new Number(document.getElementById("player1_score").innerHTML);
+	    score = score + 1;
+	    document.getElementById("player1_score").innerHTML = score;
+
+	    document.getElementById("info").innerHTML = "player 2 missed!";
+	    document.getElementById("info").style.background = "red";
+
+	    state = "player2_missed";
+
+	}
+	else {
+	    document.getElementById("info").innerHTML = "player 2 saved!";
+	    document.getElementById("info").style.background = "green";
+	}
     }
-    
+
+    if (x < 0) {
+	increment_x = increment_x * -1;	
+	var left_paddle_y = document.getElementById("paddleleft").style.top;
+	left_paddle_y = new Number(left_paddle_y.replace(/px/gi, ""));
+	
+	if ((y < left_paddle_y)
+	    ||
+	    (y > (left_paddle_y + paddle_height))) {
+	    var score = new Number(document.getElementById("player2_score").innerHTML);
+	    score = score + 1;
+	    document.getElementById("player2_score").innerHTML = score;
+
+	    document.getElementById("info").innerHTML = "player 1 missed!";
+	    document.getElementById("info").style.background = "red";
+
+	    state = "player1_missed";
+
+	}
+	else {
+	    document.getElementById("info").innerHTML = "player 1 saved!";
+	    document.getElementById("info").style.background = "green";
+	}
+    }
+
     if ((y > 390) || (y < 0)) {
 	increment_y = increment_y * -1;
     }
@@ -89,11 +135,27 @@ function move_ball(ball_id,increment_x,increment_y) {
     x = x + increment_x;
     y = y + increment_y;
  
+    if ((state == "player1_missed")
+	||
+	(state == "player2_missed")) {
+	x = 125;
+	y = 125;
+    }
+
     document.getElementById(ball_id).style.left = x+"px";
     document.getElementById(ball_id).style.top = y+"px";
 
-    move_computer_paddle();
+    move_player2_paddle();
 
-    setTimeout("move_ball('"+ball_id+"',"+increment_x+","+increment_y+")", 10);
+    if (state == "normal") {
+	setTimeout("move_ball('"+ball_id+"',"+increment_x+","+increment_y+")", 10);
+    }
+
+    if (state == "player1_missed") {
+	setTimeout("move_ball('"+ball_id+"',"+increment_x+","+increment_y+")", 200);
+    }
+    if (state == "player2_missed") {
+	setTimeout("move_ball('"+ball_id+"',"+increment_x+","+increment_y+")", 200);
+    }
 
 }
