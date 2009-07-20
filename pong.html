@@ -11,10 +11,10 @@
   <body onload="setup();">
     <div class="controls">
       <h2>Welcome to javascript pong!</h2>
-      <div>Player 1: 0</div>
+      <div>Player 1: <span id="player1_score">0</span></div>
       <div>Player 2: <span id="player2_score">0</span></div>
       <div id="info">(undef)</div>
-      <div>New Game</div>
+      <div><button onclick="window.location.reload()">New Game</button></div>
 
       <div>
 	<a href="http://github.com/ekoontz/jspong/tree/master">

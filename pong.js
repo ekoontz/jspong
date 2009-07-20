@@ -1,15 +1,19 @@
-var arena_height = "400";
-var arena_width = "400";
+var arena_height = 400;
+var arena_width = 600;
 
-var paddle_height = "75";
+var paddle_height = 75;
 
 function setup() {
 
     document.getElementById("arena").style.height = arena_height+"px";
     document.getElementById("arena").style.width = arena_width+"px";
     document.getElementById("playfield").style.height = arena_width+"px";
+    document.getElementById("right_paddle_area").style.left = (arena_width-50)+"px";
+
     document.getElementById("paddleleft").style.height = paddle_height+"px";
     document.getElementById("paddleright").style.height = paddle_height+"px";
+
+
 
     document.getElementById("paddleleft").onmousedown =
 	function() { grab_paddle(this);}
@@ -78,7 +82,7 @@ function move_ball(ball_id,increment_x,increment_y) {
     x = new Number(x.replace(/px/gi, ""));
     y = new Number(y.replace(/px/gi, ""));
  
-    if (x > 290) {
+    if (x > (arena_width - 110)) {
 	increment_x = increment_x * -1;
 
 	var right_paddle_y = document.getElementById("paddleright").style.top;
@@ -108,7 +112,7 @@ function move_ball(ball_id,increment_x,increment_y) {
 	increment_x = increment_x * -1;	
 	var left_paddle_y = document.getElementById("paddleleft").style.top;
 	left_paddle_y = new Number(left_paddle_y.replace(/px/gi, ""));
-	
+
 	if ((y < left_paddle_y)
 	    ||
 	    (y > (left_paddle_y + paddle_height))) {
@@ -138,8 +142,8 @@ function move_ball(ball_id,increment_x,increment_y) {
     if ((state == "player1_missed")
 	||
 	(state == "player2_missed")) {
-	x = 125;
-	y = 125;
+	x = arena_width / 2.0;
+	y = arena_height / 2.0;
     }
 
     document.getElementById(ball_id).style.left = x+"px";
@@ -151,11 +155,10 @@ function move_ball(ball_id,increment_x,increment_y) {
 	setTimeout("move_ball('"+ball_id+"',"+increment_x+","+increment_y+")", 10);
     }
 
-    if (state == "player1_missed") {
-	setTimeout("move_ball('"+ball_id+"',"+increment_x+","+increment_y+")", 200);
-    }
-    if (state == "player2_missed") {
-	setTimeout("move_ball('"+ball_id+"',"+increment_x+","+increment_y+")", 200);
+    if ((state == "player1_missed")
+	||
+	(state == "player2_missed")) {
+	setTimeout("move_ball('"+ball_id+"',"+increment_x+","+increment_y+")", 400);
     }
 
 }
