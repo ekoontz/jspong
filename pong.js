@@ -3,7 +3,14 @@ var arena_width = 600;
 
 var paddle_height = 75;
 
+var info;
+
+var balls;
+
 function setup() {
+    info = document.getElementById("info");
+    balls =  new Array(document.getElementById("ball1"),
+		       document.getElementById("ball2"));
 
     document.getElementById("arena").style.height = arena_height+"px";
     document.getElementById("arena").style.width = arena_width+"px";
@@ -12,8 +19,6 @@ function setup() {
 
     document.getElementById("paddleleft").style.height = paddle_height+"px";
     document.getElementById("paddleright").style.height = paddle_height+"px";
-
-
 
     document.getElementById("paddleleft").onmousedown =
 	function() { grab_paddle(this);}
@@ -74,15 +79,41 @@ function drop_paddle(obj) {
 
 
 function move_ball(ball_id,increment_x,increment_y) {
-    var x = document.getElementById(ball_id).style.left;
-    var y = document.getElementById(ball_id).style.top;
+    var this_ball = document.getElementById(ball_id);
+
+    var x = this_ball.style.left;
+    var y = this_ball.style.top;
 
     var state = "normal";
 
     x = new Number(x.replace(/px/gi, ""));
     y = new Number(y.replace(/px/gi, ""));
- 
+
+    // collisions
+    for (ball_key in balls) {
+	ball = balls[ball_key];
+
+	if (ball != this_ball) {
+	    ball_x = new Number(ball.style.left.replace(/px/gi, ""));
+	    ball_y = new Number(ball.style.top.replace(/px/gi, ""));
+	    
+	    if ((x > (ball_x - 10))
+		&&
+		(x < (ball_x + 10))
+		&&
+		(y > (ball_y - 10))
+		&&
+		(y < (ball_y + 10))) {
+		alert('collision.');
+	    }
+	    else {
+		info.style.background = "lightblue";
+	    }
+	}
+    }
+
     if (x > (arena_width - 110)) {
+	// ball reached right side of field.
 	increment_x = increment_x * -1;
 
 	var right_paddle_y = document.getElementById("paddleright").style.top;
@@ -96,19 +127,20 @@ function move_ball(ball_id,increment_x,increment_y) {
 	    score = score + 1;
 	    document.getElementById("player1_score").innerHTML = score;
 
-	    document.getElementById("info").innerHTML = "player 2 missed!";
-	    document.getElementById("info").style.background = "red";
+	    info.innerHTML = "player 2 missed!";
+	    info.style.background = "red";
 
 	    state = "player2_missed";
 
 	}
 	else {
-	    document.getElementById("info").innerHTML = "player 2 saved!";
-	    document.getElementById("info").style.background = "green";
+	    info.innerHTML = "player 2 saved!";
+	    info.style.background = "green";
 	}
     }
 
     if (x < 0) {
+	// ball reached left side of field
 	increment_x = increment_x * -1;	
 	var left_paddle_y = document.getElementById("paddleleft").style.top;
 	left_paddle_y = new Number(left_paddle_y.replace(/px/gi, ""));
@@ -146,8 +178,8 @@ function move_ball(ball_id,increment_x,increment_y) {
 	y = arena_height / 2.0;
     }
 
-    document.getElementById(ball_id).style.left = x+"px";
-    document.getElementById(ball_id).style.top = y+"px";
+    this_ball.style.left = x+"px";
+    this_ball.style.top = y+"px";
 
     move_player2_paddle();
 
@@ -162,3 +194,4 @@ function move_ball(ball_id,increment_x,increment_y) {
     }
 
 }
+
