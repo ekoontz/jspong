@@ -1,4 +1,4 @@
-var arena_height = 400;
+var arena_height = 300;
 var arena_width = 600;
 
 var paddle_height = 75;
@@ -104,7 +104,7 @@ function move_ball(ball_id,increment_x,increment_y) {
 		(y > (ball_y - 10))
 		&&
 		(y < (ball_y + 10))) {
-		alert('collision.');
+	      //		alert('collision.');
 	    }
 	    else {
 		info.style.background = "lightblue";
@@ -164,7 +164,7 @@ function move_ball(ball_id,increment_x,increment_y) {
 	}
     }
 
-    if ((y > 390) || (y < 0)) {
+    if ((y > (arena_height - 10)) || (y < 0)) {
 	increment_y = increment_y * -1;
     }
     
