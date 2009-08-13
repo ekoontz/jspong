@@ -104,7 +104,14 @@ function move_ball(ball_id,increment_x,increment_y) {
 		(y > (ball_y - 10))
 		&&
 		(y < (ball_y + 10))) {
-	      //		alert('collision.');
+
+
+		// very simple collision physics:
+		// if balls A and B collide, ball A gets deflected 
+		// as if it hit a corner (both X and Y velocity get
+		// reversed).
+		increment_y = increment_y * -1;
+		increment_x = increment_x * -1;
 	    }
 	    else {
 		info.style.background = "lightblue";
