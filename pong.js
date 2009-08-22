@@ -31,6 +31,7 @@ function setup() {
     document.getElementById("ball2").style.left = "150px";
     document.getElementById("ball2").style.top  = "50px";
 
+    // increment_x_1..N and increment_y_1..N are initial velocities for balls 1..N.
     var increment_x_1 = 3;
     var increment_y_1 = 1;
 
@@ -104,8 +105,6 @@ function move_ball(ball_id,increment_x,increment_y) {
 		(y > (ball_y - 10))
 		&&
 		(y < (ball_y + 10))) {
-
-
 		// very simple collision physics:
 		// if balls A and B collide, ball A gets deflected 
 		// as if it hit a corner (both X and Y velocity get
@@ -181,8 +180,38 @@ function move_ball(ball_id,increment_x,increment_y) {
     if ((state == "player1_missed")
 	||
 	(state == "player2_missed")) {
-	x = arena_width / 2.0;
-	y = arena_height / 2.0;
+
+	// ball fell into the gutter: push it out of a random corner with a random velocity.
+	var corner = Math.floor(Math.random()*4);
+	if (corner == 0) {
+	    y = 50;
+	    x = 50;
+
+            increment_x = Math.abs(increment_x);
+            increment_y = Math.abs(increment_y);
+	}
+	if (corner == 1) {
+	    y = arena_height - 50;
+	    x = 50;
+
+            increment_x = Math.abs(increment_x);
+            increment_y = (-1) * Math.abs(increment_y);
+
+	}
+	if (corner == 2) {
+	    y = 50;
+	    x = arena_width - 150;
+
+            increment_x = (-1) * Math.abs(increment_x);
+            increment_y = Math.abs(increment_y);
+	}
+	if (corner == 3) {
+	    y = arena_height - 50;
+	    x = arena_width - 150;
+
+            increment_x = (-1) * Math.abs(increment_x);
+            increment_y = (-1) * Math.abs(increment_y);
+	}
     }
 
     this_ball.style.left = x+"px";
