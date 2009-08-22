@@ -98,13 +98,13 @@ function move_ball(ball_id,increment_x,increment_y) {
 	    ball_x = new Number(ball.style.left.replace(/px/gi, ""));
 	    ball_y = new Number(ball.style.top.replace(/px/gi, ""));
 	    
-	    if ((x > (ball_x - 10))
+	    if ((x > (ball_x - 20))
 		&&
-		(x < (ball_x + 10))
+		(x < (ball_x + 20))
 		&&
-		(y > (ball_y - 10))
+		(y > (ball_y - 20))
 		&&
-		(y < (ball_y + 10))) {
+		(y < (ball_y + 20))) {
 		// very simple collision physics:
 		// if balls A and B collide, ball A gets deflected 
 		// as if it hit a corner (both X and Y velocity get
@@ -170,7 +170,7 @@ function move_ball(ball_id,increment_x,increment_y) {
 	}
     }
 
-    if ((y > (arena_height - 10)) || (y < 0)) {
+    if ((y > (arena_height - 20)) || (y < 0)) {
 	increment_y = increment_y * -1;
     }
     
